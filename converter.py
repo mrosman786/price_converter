@@ -39,7 +39,7 @@ def db_connection():
 
     # checking rows have price/date_of_sale null or date_of_sale<1999
     cursor.execute(
-        "SELECT count(*) FROM public.result where (price is Null or date_of_sale is null or date_of_sale<'1999-01-01'::date) and is_to_USD_price_done is Null or is_to_USD_price_done=false")
+        f"SELECT count(*) FROM {os.getenv('table')} where (price is Null or date_of_sale is null or date_of_sale<'1999-01-01'::date) and is_to_USD_price_done is Null or is_to_USD_price_done=false")
     fetched = cursor.fetchone()
 
     # if filtered rows exists lets update them.
